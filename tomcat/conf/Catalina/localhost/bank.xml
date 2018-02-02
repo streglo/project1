@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="bank" path="/bank" reloadable="true">
+	<!-- Database configuration for the Datalex TDP Business Rules Centre -->
+	<!-- $Revision: 1.4 $ -->
+	<Environment description="URL for configuring log4j context" name="log4j/configuration-resource" type="java.lang.String" value="${catalina.home}/conf/Catalina/localhost/bank.log4j.properties"/>
+
+	<Resource name="jdbc/bankDB" 
+		auth="Container" 
+		description="DB Connection" 
+		type="javax.sql.DataSource" 
+		factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+		testOnBorrow="true" 
+		validationInterval="30000" 
+		validationQuery="SELECT 1"
+		timeBetweenEvictionRunsMillis="30000"
+		maxActive="10"
+		minIdle="10"
+		maxWait="10000"
+		initialSize="10"
+		removeAbandonedTimeout="60"
+		removeAbandoned="true"
+		logAbandoned="true"
+		minEvictableIdleTimeMillis="30000"
+		jmxEnabled="true"
+		jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+		driverClassName="org.h2.Driver" 
+		url="jdbc:h2:mem:bank" 
+		username="sa" 
+		password="" 
+	/>
+
+	<!-- Link to the user database we will get roles from -->
+	<ResourceLink name="users" global="UserDatabase" type="org.apache.catalina.UserDatabase"/>
+	<!-- Disable persistent sessions -->
+	<Manager pathname=""/>
+
+</Context>
