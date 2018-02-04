@@ -67,6 +67,7 @@
                     <td></td>
                 </tr>
             </c:forEach>
+<% if (request.isUserInRole("admin")) { %>
                 <tr id="newAccount" hidden="false">
                     <td></td>
                     <td>
@@ -106,9 +107,12 @@
                     <td></td>
                     <td><input type="image" class="postAccount" src="${context}/resources/img/ok.jpg" border="0" alt="Submit" /></td>
                 </tr>
+<% } %>
             </table>
         </form>
+<% if (request.isUserInRole("admin")) { %>
         <input type="image" class="addAccount" src="${context}/resources/img/plus.png" onclick="javascript:accountPlus();"/>
+<% } %>
     </div>
 
 </body>
