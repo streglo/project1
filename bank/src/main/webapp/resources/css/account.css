@@ -1,0 +1,11 @@
+
+input.addAccount {
+    height: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+input.postAccount {
+    height: 20px;
+    margin-left: 20px;
+}

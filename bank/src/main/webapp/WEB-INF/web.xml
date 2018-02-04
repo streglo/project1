@@ -5,7 +5,16 @@
           http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     version="3.0">
 
-    <display-name>Servlet 3.0 Web Application</display-name>
+    <display-name>Bank Web Application</display-name>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <!--<secure>true</secure>-->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
@@ -22,4 +31,100 @@
         </listener-class>
     </listener>
 
+    <servlet>
+        <servlet-name>Locale</servlet-name>
+        <servlet-class>com.epam.bank.servlets.LocaleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Locale</servlet-name>
+        <url-pattern>/locale/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.epam.bank.servlets.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Main Page</servlet-name>
+        <jsp-file>/WEB-INF/jsp/main.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Main Page</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Account Page</servlet-name>
+        <!--<jsp-file>/WEB-INF/jsp/account.jsp</jsp-file>-->
+        <servlet-class>com.epam.bank.servlets.AccountServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Account Page</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>SecuredResources</web-resource-name>
+            <url-pattern>/main</url-pattern>
+            <url-pattern>/account</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>PublicResources</web-resource-name>
+            <url-pattern>/locale/*</url-pattern>
+            <url-pattern>/html/*</url-pattern>
+            <url-pattern>/resources/*</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>Default</realm-name>
+        <form-login-config>
+            <form-login-page>/WEB-INF/jsp/login.jsp</form-login-page>
+            <form-error-page>/WEB-INF/jsp/errorLogin.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/html/403.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/html/404.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/html/500.html</location>
+    </error-page>
+
+    <jsp-config>
+        <taglib>
+            <taglib-uri>https://bank.epam.com/jsp/tlds/tags</taglib-uri>
+            <taglib-location>/WEB-INF/taglibs.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>

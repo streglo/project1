@@ -1,0 +1,10 @@
+div.logout {
+    float: right;
+    margin-left: 20px;
+}
+div.language {
+    float: right;
+}
+label.error {
+    color: red;
+}
